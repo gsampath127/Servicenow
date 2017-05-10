@@ -1,0 +1,21 @@
+{
+  "name": "venue",
+  "version": "1.0.0",
+  "description": "Chat bot app for venue application with integration of service now API",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "service",
+    "now"
+  ],
+  "author": "Sampath Kumar Gajawada",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "body-parser": "^1.17.1"
+  },
+  "devDependencies": {}
+}
