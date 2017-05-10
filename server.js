@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/getAllIncidents', function (req, res) {
-    res.send("hello");
+    //res.send("hello");
     var url = "https://dev19713.service-now.com/api/now/table/incident";
     request.get(url, {
         'auth': {
