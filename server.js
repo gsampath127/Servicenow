@@ -50,7 +50,7 @@ app.get('/getAllIncidents', function (req, res) {
         console.log(response.headers['content-type'])
         response.on('data', function (data) {
             console.log('data: ' + data);
-            res.send(data);
+            res.write(data);
         })
     });
 });
