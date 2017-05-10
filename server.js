@@ -30,17 +30,21 @@ app.listen(app.get('port'));
 // shoutout to the user                     
 console.log('Application started on port ' + app.get('port'));
 
-var url = "https://dev19713.service-now.com/api/now/table/incident";
-request.get(url, {
-    'auth': {
-        'user': 'admin',
-        'pass': 'SAMPATH18',
-        'sendImmediately': false
-    }
-}).on('response', function (response) {
-    console.log(response.statusCode);
-    console.log(response.headers['content-type'])
-    response.on('data', function (data) {
-        console.log('data: ' + data);
-    })
+//var url = "https://dev19713.service-now.com/api/now/table/incident";
+//request.get(url, {
+//    'auth': {
+//        'user': 'admin',
+//        'pass': 'SAMPATH18',
+//        'sendImmediately': false
+//    }
+//}).on('response', function (response) {
+//    console.log(response.statusCode);
+//    console.log(response.headers['content-type'])
+//    response.on('data', function (data) {
+//        console.log('data: ' + data);
+//    })
+//});
+
+app.get('/', function (req, res) {
+    res.send("hello");
 });
