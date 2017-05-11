@@ -4,6 +4,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var apiaiAssistant = require('actions-on-google').ApiAiAssistant;
 
 var request = require('request');
 
@@ -74,11 +75,51 @@ app.get('/getAllIncidents', function (req, res) {
 //    });
 //});
 
-app.post('/incident', function (req, res) {
-   // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
-    return res.json({
-        speech:  'hellllllllllllllllllllllll',
-        displayText: "hellooooooooooooo",
-        source: 'webhook-echo-sample'
-    });
-});
+//app.post('/incident', function (req, res) {
+//   // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+//    return res.json({
+//        speech:  'hellllllllllllllllllllllll',
+//        displayText: "hellooooooooooooo",
+//        source: 'webhook-echo-sample'
+//    });
+//});
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+//Intents
+const WELCOMEINTENT = 'input.welcome';
+const INCIDENT = 'incident';
+
+//Entities
+const incidentId = 'any';
+
+//Functions
+//function welcomeIntent(assistant) {
+//    assistant.ask("With EShopping, you can get the product order status);
+//    }
+
+function trackOrderStatus(assistant) {
+    var orderidfromuser = assistant.getArgument(ORDERID);
+    var orderStatusMessage = "";
+    var orderDescription = "Your order" + orderidfromuser + "is";  
+ 
+    if (orderidfromuser != null) { 
+        assistant.ask (orderStatusMessage + "\n" +"is Available");
+    }
+
+    else {
+        assistant.ask("please provide valid order id to check your order status");
+    }
+}
+function getIncidents(assistant)
+{
+    assistant.ask("please provide valid order id to check your order status");
+}
+exports.incident = function (request, response) {
+    var assistant = new ApiAiAssistant({request: request, response: response});
+    var actionMap = new Map ();
+   // actionMap.set(WELCOMEINTENT, WelcomeIntent);
+    actionMap.set(INCIDENT, getIncidents);
+    assistant.handleRequest(actionMap);
+};
