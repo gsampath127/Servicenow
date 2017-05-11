@@ -75,7 +75,7 @@ app.get('/getAllIncidents', function (req, res) {
 //    });
 //});
 
-app.post('/incident', function (req, res) {
+app.post('/', function (req, res) {
    // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
     //return res.json({
     //    speech:  'hellllllllllllllllllllllll',
