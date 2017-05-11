@@ -75,14 +75,19 @@ app.get('/getAllIncidents', function (req, res) {
 //    });
 //});
 
-//app.post('/incident', function (req, res) {
-//   // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
-//    return res.json({
-//        speech:  'hellllllllllllllllllllllll',
-//        displayText: "hellooooooooooooo",
-//        source: 'webhook-echo-sample'
-//    });
-//});
+app.post('/incident', function (req, res) {
+   // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+    //return res.json({
+    //    speech:  'hellllllllllllllllllllllll',
+    //    displayText: "hellooooooooooooo",
+    //    source: 'webhook-echo-sample'
+    //});
+    var assistant = new ApiAiAssistant({ request: request, response: response });
+    var actionMap = new Map();
+    // actionMap.set(WELCOMEINTENT, WelcomeIntent);
+    actionMap.set(INCIDENT, getIncidents);
+    assistant.handleRequest(actionMap);
+});
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -116,10 +121,10 @@ function getIncidents(assistant)
 {
     assistant.ask("please provide valid order id to check your order status");
 }
-exports.incident = function (request, response) {
-    var assistant = new ApiAiAssistant({request: request, response: response});
-    var actionMap = new Map ();
-   // actionMap.set(WELCOMEINTENT, WelcomeIntent);
-    actionMap.set(INCIDENT, getIncidents);
-    assistant.handleRequest(actionMap);
-};
+//exports.incident = function (request, response) {
+//    var assistant = new ApiAiAssistant({request: request, response: response});
+//    var actionMap = new Map ();
+//   // actionMap.set(WELCOMEINTENT, WelcomeIntent);
+//    actionMap.set(INCIDENT, getIncidents);
+//    assistant.handleRequest(actionMap);
+//};
