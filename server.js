@@ -75,9 +75,9 @@ app.get('/incident', function (req, res) {
 });
 
 app.post('/incident', function (req, res) {
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+   // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
     return res.json({
-        speech: speech + req.body.result.parameters.incident,
+        speech:  req.body.result.parameters.incident,
         displayText: "hellooooooooooooo",
         source: 'webhook-echo-sample'
     });
