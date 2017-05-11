@@ -54,3 +54,22 @@ app.get('/getAllIncidents', function (req, res) {
         })
     });
 });
+app.get('/incident', function (req, res) {
+    //res.send("hello");
+    var sysId = req.query.Id;
+    var url = "https://dev19713.service-now.com/api/now/table/incident"+"/"+sysId;
+    request.get(url, {
+        'auth': {
+            'user': 'admin',
+            'pass': 'SAMPATH18',
+            'sendImmediately': false
+        }
+    }).on('response', function (response) {
+        console.log(response.statusCode);
+        console.log(response.headers['content-type'])
+        response.on('data', function (data) {
+            console.log('data: ' + data);
+            res.write(data);
+        })
+    });
+});
