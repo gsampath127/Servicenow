@@ -168,7 +168,8 @@ function getIncidentInfo(sysId, assistant)
             response.on('data', function (data) {
                 
                 var incident = JSON.parse(data);
-                console.log('data: ' + incident);
+                console.log('incident');
+                console.log(incident);
                 
 
 
