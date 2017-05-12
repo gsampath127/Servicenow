@@ -75,6 +75,13 @@ app.get('/getAllIncidents', function (req, res) {
 //    });
 //});
 
+//Intents
+const WELCOMEINTENT = 'input.welcome';
+const INCIDENT = 'incident';
+
+//Entities
+const incidentId = 'any';
+
 app.post('/', function (req, res) {
    // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
     //return res.json({
@@ -92,31 +99,8 @@ app.post('/', function (req, res) {
 ///////////////////////////////////////////////////////////////////////////////
 
 
-//Intents
-const WELCOMEINTENT = 'input.welcome';
-const INCIDENT = 'incident';
 
-//Entities
-const incidentId = 'any';
 
-//Functions
-//function welcomeIntent(assistant) {
-//    assistant.ask("With EShopping, you can get the product order status);
-//    }
-
-function trackOrderStatus(assistant) {
-    var orderidfromuser = assistant.getArgument(ORDERID);
-    var orderStatusMessage = "";
-    var orderDescription = "Your order" + orderidfromuser + "is";  
- 
-    if (orderidfromuser != null) { 
-        assistant.ask (orderStatusMessage + "\n" +"is Available");
-    }
-
-    else {
-        assistant.ask("please provide valid order id to check your order status");
-    }
-}
 function getIncidents(assistant)
 {
     assistant.ask("please provide valid order id to check your order status");
