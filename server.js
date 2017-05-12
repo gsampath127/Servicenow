@@ -174,7 +174,7 @@ function getIncidentInfo(sysId, assistant)
 
                 
                 //resolve(assistant.tell("Incident 1 Severity" + incident.result.agent));
-                resolve(assistant.tell("Incident 2 Severity" + incident.result[0].agent));
+                resolve(assistant.tell("Incident 2 Severity" + incident));
               
                
 
