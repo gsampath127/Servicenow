@@ -122,20 +122,22 @@ function responseHandler (assistant) {
 
 function incidentIntent(assistant)
 {
-    return new Promise(function (resolve, reject) {
+    //return new Promise(function (resolve, reject) {
 
         var sysId = assistant.getArgument('Id');
         //resolve(assistant.tell('Incident severity ' ));
         // assistant.tell('You Said' + sysId);
        // assistant.handleRequest(getIncidentInfo(sysId));
-        getIncidentInfo(sysId).then(function (data) {
+        return getIncidentInfo(sysId, assistant);
+        
+        //.then(function (data) {
 
-           // assistant.tell('Fetching incident information......................');
-            resolve(assistant.tell('Incident severity ' + data.severity));
-        }, function (err) {
-            resolve(assistant.tell('Error occured ' ));
-        });
-    });
+        //   // assistant.tell('Fetching incident information......................');
+        //    resolve(assistant.tell('Incident severity ' + data.severity));
+        //}, function (err) {
+        //    resolve(assistant.tell('Error occured ' ));
+        //});
+  //  });
     
     
     
@@ -145,7 +147,7 @@ function incidentIntent(assistant)
 function welcomeIntent (assistant) {
     assistant.ask('Welcome to Servicenow chat service .');
 }
-function getIncidentInfo(sysId)
+function getIncidentInfo(sysId, assistant)
 {
     return new Promise(function (resolve, reject) {
 
@@ -162,7 +164,7 @@ function getIncidentInfo(sysId)
             response.on('data', function (data) {
                 console.log('data: ' + data);
                 var incident = data.result;
-                 resolve(incident);
+                resolve(assistant.tell("severrrr"));
               
                
 
