@@ -79,8 +79,8 @@ app.get('/getAllIncidents', function (req, res) {
 
 // Create functions to handle requests here
 const WELCOME_INTENT = 'input.welcome';  // the action name from the API.AI intent
-const NUMBER_INTENT = 'input.number';  // the action name from the API.AI intent
-const NUMBER_ARGUMENT = 'input.mynum'; // the action name from the API.AI intent
+const INCIDENT_INTENT = 'input.incident';  // the action name from the API.AI intent
+
 
 
 
@@ -93,6 +93,7 @@ function sillyNameMaker(req, res) {
 
     var actionMap = new Map();
     actionMap.set(WELCOME_INTENT, welcomeIntent);
+    actionMap.set(INCIDENT_INTENT, incidentIntent);
     //actionMap.set(NUMBER_INTENT, numberIntent);
     assistant.handleRequest(actionMap);
 
@@ -122,8 +123,13 @@ function numberIntent (assistant) {
     assistant.tell('You said ' + number);
 }
 
+function incidentIntent(assistant)
+{
+    assistant.tell('incident working');
+}
+
 function welcomeIntent (assistant) {
-    assistant.ask('Welcome to action snippets! Say a number.');
+    assistant.ask('Welcome to Servicenow chat service .');
 }
 
 app.post('/google', function (req, res) {
