@@ -123,7 +123,7 @@ function responseHandler (assistant) {
 function incidentIntent(assistant)
 {
     var sysId = assistant.getArgument('Id');
-    assistant.tell('You Said' + sysId);
+   // assistant.tell('You Said' + sysId);
     assistant.handleRequest(getIncidentInfo(sysId));
     
     //getIncidentInfo(sysId).then(function (data) {
