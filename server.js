@@ -164,27 +164,24 @@ function getIncidentInfo(sysId, assistant)
         }).on('response', function (response) {
             console.log(response.statusCode);
             console.log(response.headers['content-type']);
-            
-            response.on('data', function (data) {
-                if (data)
-                {
+          
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
 
-                    var incident = JSON.parse(data);
-                    console.log('incident');
-                    console.log(incident);
-
-
-
-
-                    //resolve(assistant.tell("Incident 1 Severity" + incident.result.agent));
-                    resolve(assistant.tell("Incident 2 Severity" + incident.result.made_sla));
+            response.on('end', function () {
+                //console.log(req.data);
+                console.log(str);
+                // your code here if you want to use the results !
+                var incident = JSON.parse(str);
+                console.log('incident');
+                console.log(incident);
 
 
-                }
-                
 
 
-                //res.write(data);
+                //resolve(assistant.tell("Incident 1 Severity" + incident.result.agent));
+                resolve(assistant.tell("Incident 2 Severity" + incident.result.made_sla));
             });
         });
 
