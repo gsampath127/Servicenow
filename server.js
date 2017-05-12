@@ -125,13 +125,14 @@ function incidentIntent(assistant)
     return new Promise(function (resolve, reject) {
 
         var sysId = assistant.getArgument('Id');
+        resolve(assistant.tell('Incident severity ' ));
         // assistant.tell('You Said' + sysId);
         //assistant.handleRequest(getIncidentInfo(sysId));
-        getIncidentInfo(sysId).then(function (data) {
+        //getIncidentInfo(sysId).then(function (data) {
 
-           // assistant.tell('Fetching incident information......................');
-            resolve(assistant.tell('Incident severity ' + data.severity));
-        });
+        //   // assistant.tell('Fetching incident information......................');
+        //    resolve(assistant.tell('Incident severity ' + data.severity));
+        //});
     });
     
     
