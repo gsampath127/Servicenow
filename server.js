@@ -123,7 +123,7 @@ function responseHandler (assistant) {
 function incidentIntent(assistant)
 {
     var sysId = assistant.getArgument('Id');
-    assistant.tell('You Said' + sysId);
+   // assistant.tell('You Said' + sysId);
     
         var url = "https://dev19713.service-now.com/api/now/table/incident"+"/"+sysId;
         request.get(url, {
