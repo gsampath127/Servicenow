@@ -150,7 +150,7 @@ function welcomeIntent (assistant) {
 function getIncidentInfo(sysId, assistant)
 {
     return new Promise(function (resolve, reject) {
-
+        var str = '';
         var url = "https://dev19713.service-now.com/api/now/table/problem" + "/" + sysId;
         request.get(url, {
             'auth': {
