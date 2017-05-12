@@ -124,8 +124,22 @@ function incidentIntent(assistant)
 {
     var sysId = assistant.getArgument('Id');
    // assistant.tell('You Said' + sysId);
-    assistant.tell('Fetching incident information');
-        var url = "https://dev19713.service-now.com/api/now/table/incident"+"/"+sysId;
+    
+    getIncidentInfo(sysId).then(function (data) {
+
+        assistant.tell('Fetching incident information......................');
+    });
+        
+}
+
+function welcomeIntent (assistant) {
+    assistant.ask('Welcome to Servicenow chat service .');
+}
+function getIncidentInfo(sysId)
+{
+    return new Promise(function (resolve, reject) {
+
+        var url = "https://dev19713.service-now.com/api/now/table/incident" + "/" + sysId;
         request.get(url, {
             'auth': {
                 'user': 'admin',
@@ -137,18 +151,18 @@ function incidentIntent(assistant)
             console.log(response.headers['content-type'])
             response.on('data', function (data) {
                 console.log('data: ' + data);
-                var incident = data.result;
-                assistant.tell('Fetching incident information');
+                return resolve(data.result);
+              //  var incident = data.result;
+               // assistant.tell('Fetching incident information');
 
-                assistant.tell('Incident severity ' + incident.severity);
+               // assistant.tell('Incident severity ' + incident.severity);
 
                 //res.write(data);
             })
         });
-}
 
-function welcomeIntent (assistant) {
-    assistant.ask('Welcome to Servicenow chat service .');
+    });
+    
 }
 
 app.post('/google', function (req, res) {
