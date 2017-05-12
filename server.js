@@ -75,40 +75,65 @@ app.get('/getAllIncidents', function (req, res) {
 //    });
 //});
 
-//Intents
-const WELCOMEINTENT = 'input.welcome';
-const INCIDENT = 'incident';
 
-//Entities
-const incidentId = 'any';
 
-app.post('/', function (req, res) {
-   // var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
-    //return res.json({
-    //    speech:  'hellllllllllllllllllllllll',
-    //    displayText: "hellooooooooooooo",
-    //    source: 'webhook-echo-sample'
-    //});
-    var assistant = new ApiAiAssistant({ request: request, response: response });
+// Create functions to handle requests here
+const WELCOME_INTENT = 'input.welcome';  // the action name from the API.AI intent
+const NUMBER_INTENT = 'input.number';  // the action name from the API.AI intent
+const NUMBER_ARGUMENT = 'input.mynum'; // the action name from the API.AI intent
+
+
+
+
+
+function sillyNameMaker(req, res) {
+    const assistant = new ApiAiAssistant({ request: req, response: res });
+
+    
+
     var actionMap = new Map();
-    // actionMap.set(WELCOMEINTENT, WelcomeIntent);
-    actionMap.set(INCIDENT, getIncidents);
+    actionMap.set(WELCOME_INTENT, welcomeIntent);
+    //actionMap.set(NUMBER_INTENT, numberIntent);
     assistant.handleRequest(actionMap);
-});
-
-///////////////////////////////////////////////////////////////////////////////
 
 
-
-
-function getIncidents(assistant)
-{
-    assistant.ask("please provide valid order id to check your order status");
+    // you can add the function name instead of an action map
+    assistant.handleRequest(responseHandler);
 }
-//exports.incident = function (request, response) {
-//    var assistant = new ApiAiAssistant({request: request, response: response});
-//    var actionMap = new Map ();
-//   // actionMap.set(WELCOMEINTENT, WelcomeIntent);
-//    actionMap.set(INCIDENT, getIncidents);
-//    assistant.handleRequest(actionMap);
-//};
+
+function responseHandler (assistant) {
+    console.log("okok")
+    // intent contains the name of the intent you defined in the Actions area of API.AI
+    assistant.ask('Welcome! Say a number.');
+    //let intent = assistant.getIntent();
+    //switch (intent) {
+    //    case WELCOME_INTENT:
+    //        assistant.ask('Welcome! Say a number.');
+    //        break;
+
+    //    case NUMBER_INTENT:
+    //        let number = assistant.getArgument(NUMBER_ARGUMENT);
+    //        assistant.tell('You said ' + number);
+    //        break;
+    //}
+}
+function numberIntent (assistant) {
+    var number = assistant.getArgument(NUMBER_ARGUMENT);
+    assistant.tell('You said ' + number);
+}
+
+function welcomeIntent (assistant) {
+    assistant.ask('Welcome to action snippets! Say a number.');
+}
+
+app.post('/google', function (req, res) {
+    console.log(req.body);
+    sillyNameMaker(req, res);
+})
+
+
+app.get('/', function (req, res) {
+    res.send("Server is up and running.")
+})
+
+
