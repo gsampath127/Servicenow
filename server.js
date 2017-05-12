@@ -170,7 +170,7 @@ function getIncidentInfo(sysId, assistant)
                 var incident = JSON.parse(data);
                 console.log('data: ' + incident);
                 
-                resolve(assistant.tell("Incident 1 Severity" + incident.result));
+                resolve(assistant.tell("Incident 1 Severity" + incident.result.agent));
                 resolve(assistant.tell("Incident 2 Severity" + data.result.agent));
               
                
