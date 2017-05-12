@@ -159,7 +159,7 @@ function getIncidentInfo(sysId)
             response.on('data', function (data) {
                 console.log('data: ' + data);
                 var incident = data.result;
-                return resolve(incident);
+                 resolve(incident);
               
                // assistant.tell('Fetching incident information');
 
