@@ -123,12 +123,13 @@ function responseHandler (assistant) {
 function incidentIntent(assistant)
 {
     var sysId = assistant.getArgument('Id');
-   // assistant.tell('You Said' + sysId);
+    assistant.tell('You Said' + sysId);
+    assistant.handleRequest(getIncidentInfo(sysId);
     
-    getIncidentInfo(sysId).then(function (data) {
+    //getIncidentInfo(sysId).then(function (data) {
 
-        assistant.tell('Fetching incident information......................');
-    });
+    //    assistant.tell('Fetching incident information......................');
+    //});
         
 }
 
@@ -151,8 +152,9 @@ function getIncidentInfo(sysId)
             console.log(response.headers['content-type'])
             response.on('data', function (data) {
                 console.log('data: ' + data);
-                return resolve(data.result);
-              //  var incident = data.result;
+                var incident = data.result;
+                return resolve(assistant.tell('Incident severity ' + incident.severity));
+              
                // assistant.tell('Fetching incident information');
 
                // assistant.tell('Incident severity ' + incident.severity);
