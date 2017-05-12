@@ -125,7 +125,8 @@ function numberIntent (assistant) {
 
 function incidentIntent(assistant)
 {
-    assistant.tell('incident working');
+    var number = assistant.getArgument('any');
+    assistant.tell('incident working...'+number);
 }
 
 function welcomeIntent (assistant) {
