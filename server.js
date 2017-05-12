@@ -167,7 +167,7 @@ function getIncidentInfo(sysId, assistant)
           
             response.on('data', function (data) {
                 console.log('data: ' + data);
-                var incident = data;//JSON.parse(data);
+                var incident = JSON.parse(data);
                 
                 resolve(assistant.tell("Incident Severity" + incident.result));
               
