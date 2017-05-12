@@ -99,7 +99,7 @@ function sillyNameMaker(req, res) {
 
 
     // you can add the function name instead of an action map
-    assistant.handleRequest(responseHandler);
+    //assistant.handleRequest(responseHandler);
 }
 
 function responseHandler (assistant) {
