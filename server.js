@@ -161,16 +161,19 @@ function getIncidentInfo(sysId, assistant)
         }).on('response', function (response) {
             console.log(response.statusCode);
             console.log(response.headers['content-type'])
-            response.on('data', function (data) {
-                console.log('data: ' + data);
-                var incident = JSON.stringify(data);
-                
+            var incident = JSON.parse(response.data);
+
                 resolve(assistant.tell("Incident Severity" + incident));
+            //response.on('data', function (data) {
+            //    console.log('data: ' + data);
+            //    var incident = JSON.parse(data);
+                
+            //    resolve(assistant.tell("Incident Severity" + incident));
               
                
 
-                //res.write(data);
-            })
+            //    //res.write(data);
+            //})
         });
 
     });
