@@ -122,14 +122,20 @@ function responseHandler (assistant) {
 
 function incidentIntent(assistant)
 {
-    var sysId = assistant.getArgument('Id');
-   // assistant.tell('You Said' + sysId);
-    assistant.handleRequest(getIncidentInfo(sysId));
-    
-    //getIncidentInfo(sysId).then(function (data) {
+    return new Promise(function (resolve, reject) {
 
-    //    assistant.tell('Fetching incident information......................');
-    //});
+        var sysId = assistant.getArgument('Id');
+        // assistant.tell('You Said' + sysId);
+        //assistant.handleRequest(getIncidentInfo(sysId));
+        getIncidentInfo(sysId).then(function (data) {
+
+           // assistant.tell('Fetching incident information......................');
+            resolve(assistant.tell('Incident severity ' + data.severity));
+        });
+    });
+    
+    
+    
         
 }
 
@@ -153,7 +159,7 @@ function getIncidentInfo(sysId)
             response.on('data', function (data) {
                 console.log('data: ' + data);
                 var incident = data.result;
-                return resolve(assistant.tell('Incident severity ' + incident.severity));
+                return resolve(incident);
               
                // assistant.tell('Fetching incident information');
 
