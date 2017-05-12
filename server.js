@@ -87,7 +87,7 @@ const NUMBER_ARGUMENT = 'input.mynum'; // the action name from the API.AI intent
 
 
 function sillyNameMaker(req, res) {
-    const assistant = new ApiAiAssistant({ request: req, response: res });
+    const assistant = new apiaiAssistant({ request: req, response: res });
 
     
 
