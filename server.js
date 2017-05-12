@@ -118,15 +118,33 @@ function responseHandler (assistant) {
     //        break;
     //}
 }
-function numberIntent (assistant) {
-    var number = assistant.getArgument(NUMBER_ARGUMENT);
-    assistant.tell('You said ' + number);
-}
+
 
 function incidentIntent(assistant)
 {
-    var number = assistant.getArgument('any');
-    assistant.tell('incident working...'+number);
+    var sysId = assistant.getArgument('Id');
+    assistant.tell('You Said' + sysId);
+    
+        var url = "https://dev19713.service-now.com/api/now/table/incident"+"/"+sysId;
+        request.get(url, {
+            'auth': {
+                'user': 'admin',
+                'pass': 'SAMPATH18',
+                'sendImmediately': false
+            }
+        }).on('response', function (response) {
+            console.log(response.statusCode);
+            console.log(response.headers['content-type'])
+            response.on('data', function (data) {
+                console.log('data: ' + data);
+                var incident = data.result;
+                assistant.tell('Fetching incident information');
+
+                assistant.tell('Incident severity ' + incident.severity);
+
+                //res.write(data);
+            })
+        });
 }
 
 function welcomeIntent (assistant) {
