@@ -163,24 +163,30 @@ function getIncidentInfo(sysId, assistant)
             }
         }).on('response', function (response) {
             console.log(response.statusCode);
-            console.log(response.headers['content-type'])
+            console.log(response.headers['content-type']);
+            console.log('response data');
+            console.log(response.data);
+            var incident = JSON.parse(response.data);
+            console.log('incident');
+            console.log(incident);
+            resolve(assistant.tell("Incident 1 Severity" + incident.result.made_sla));
           
-            response.on('data', function (data) {
+            //response.on('data', function (data) {
                 
-                var incident = JSON.parse(data);
-                console.log('incident');
-                console.log(incident);
+            //    var incident = JSON.parse(data);
+            //    console.log('incident');
+            //    console.log(incident);
                 
 
 
                 
-                //resolve(assistant.tell("Incident 1 Severity" + incident.result.agent));
-                resolve(assistant.tell("Incident 2 Severity" + incident[0].made_sla))
+            //    //resolve(assistant.tell("Incident 1 Severity" + incident.result.agent));
+            //    resolve(assistant.tell("Incident 2 Severity" + incident[0].made_sla))
               
                
 
-                //res.write(data);
-            })
+            //    //res.write(data);
+            //})
         });
 
     });
