@@ -165,7 +165,7 @@ function getIncidentInfo(sysId, assistant)
             console.log(response.statusCode);
             console.log(response.headers['content-type']);
             console.log('response data');
-            console.log(response.data);
+            console.log(response);
             var incident = JSON.parse(response.data);
             console.log('incident');
             console.log(incident);
