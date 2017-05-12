@@ -151,7 +151,7 @@ function getIncidentInfo(sysId, assistant)
 {
     return new Promise(function (resolve, reject) {
 
-        var url = "https://dev19713.service-now.com/api/now/table/incident" + "/" + sysId;
+        var url = "https://dev19713.service-now.com/api/now/table/probk" + "/" + sysId;
         request.get(url, {
             'auth': {
                 'user': 'admin',
@@ -167,7 +167,7 @@ function getIncidentInfo(sysId, assistant)
           
             response.on('data', function (data) {
                 console.log('data: ' + data);
-                var incident = JSON.parse(data);
+                var incident =JSON.parse(data);
                 
                 resolve(assistant.tell("Incident Severity" + incident.result));
               
