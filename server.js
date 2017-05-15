@@ -243,7 +243,7 @@ function createProblem(assistant) {
             },
             'body':
                 {
-                    'short_description':description, 'urgency':urgency
+                    'short_description':description, 'urgency':'2'
                 },
             json: true,
         }).on('response', function (response) {
