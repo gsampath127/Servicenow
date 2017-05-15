@@ -132,6 +132,7 @@ function getProblemInfo(sysId, assistant) {
 
 function getAllProblems(assistant)
 {
+    var state = assistant.getArgument('state');
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = "https://dev19713.service-now.com/api/now/table/problem";
@@ -153,13 +154,19 @@ function getAllProblems(assistant)
             });
 
             response.on('end', function () {
-
-                var problems = JSON.parse(str);
+                var obj = JSON.parse(str),
+                 problems = obj.result;
+                if (state)
+                {
+                    problems = problems.filter(function (e) {
+                        return (e.state == state);
+                    });
+                }
                 var speech = "Please find below problems ";
 
-                for (var i = 0 ; i < problems.result.length ; i++)
+                for (var i = 0 ; i < problems.length ; i++)
                 {
-                    speech = speech + problems.result[i].number +"describes on "+ problems.result[i].short_description;
+                    speech = speech + problems[i].number + "describes on " + problems[i].short_description;
                 }
                 resolve(assistant.tell(speech));
             });
@@ -176,6 +183,8 @@ app.post('/google', function (req, res) {
 
 app.get('/', function (req, res) {
     res.send("Server is up and running.")
-})
+});
+
+
 
 
