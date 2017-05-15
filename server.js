@@ -97,7 +97,7 @@ function problemAllIntent(assistant) {
 }
 function problemCreateIntent(assistant) {
 
-    return craeateProblem(assistant);
+    return createProblem(assistant);
 
 }
 
@@ -225,7 +225,7 @@ function getProblemInfo(sysId) {
     });
 
 }
-function craeateProblem(assistant) {
+function createProblem(assistant) {
     var description = assistant.getArgument('description');
     var urgency = assistant.getArgument('urgency');
     return new Promise(function (resolve, reject) {
@@ -240,7 +240,7 @@ function craeateProblem(assistant) {
             'headers': {
                 'Content-Type': 'application/json'
             },
-            'body':
+            'form':
                 {
                     'short_description':description, 'urgency':urgency
                 },
