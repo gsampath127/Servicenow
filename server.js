@@ -34,42 +34,8 @@ console.log('Application started on port ' + app.get('port'));
 
 
 app.get('/', function (req, res) {
-    //res.send("hello");
-    var str = '';
-    var url = "https://dev19713.service-now.com/api/now/table/problem";
-    request.post(url, {
-        'auth': {
-            'user': 'admin',
-            'pass': 'SAMPATH18',
-            'sendImmediately': false
-        },
-        'headers': {
-            'Content-Type': 'application/json'
-        },
-        'body':
-            {
-                'short_description':'problem from postman', 'urgency':'3'
-            },
-        json: true,
-    }).on('response', function (response) {
-        //console.log(response.statusCode);
-        //console.log(response.headers['content-type']);
-        res.send(response);
-            
-        response.on('data', function (chunk) {
-            str += chunk;
-            res.send(chunk);
-        });
-
-        response.on('end', function () {
-
-            var problem = JSON.parse(str);
-            var speech = "This new problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
-            
-        });
-    });
-
-
+    res.send("hello");
+  
 });
 
 app.get('/getAllIncidents', function (req, res) {
@@ -279,6 +245,7 @@ function createProblem(assistant) {
                 {
                     'short_description':description, 'urgency':urgency
                 },
+            json: true,
         }).on('response', function (response) {
             console.log(response.statusCode);
             console.log(response.headers['content-type']);
