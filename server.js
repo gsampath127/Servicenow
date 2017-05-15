@@ -174,7 +174,7 @@ function getIncidentInfo(sysId, assistant)
                 console.log(str);
                 // your code here if you want to use the results !
                 var problem = JSON.parse(str);
-                var speech = "This problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + sys_updated_by;
+                var speech = "This problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
                 resolve(assistant.tell(speech));
             });
         });
