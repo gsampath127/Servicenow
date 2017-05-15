@@ -240,7 +240,7 @@ function craeateProblem(assistant) {
             'headers': {
                 'Content-Type': 'application/json'
             },
-            'form':
+            'body':
                 {
                     'short_description':description, 'urgency':urgency
                 },
