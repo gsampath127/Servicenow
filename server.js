@@ -119,7 +119,7 @@ function InitializeAssistant(req, res) {
 
 
 function problemIntent(assistant) {
-    var sysId = assistant.getArgument('Id');
+    
     return getProblemInfo(sysId, assistant);
 
 }
@@ -174,6 +174,7 @@ function getAllProblems(assistant)
 {
     var state = assistant.getArgument('state');
     var urgency = assistant.getArgument('urgency');
+    var problemNumber = assistant.getArgument('problemNumber');
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = "https://dev19713.service-now.com/api/now/table/problem";
@@ -198,6 +199,12 @@ function getAllProblems(assistant)
                 var obj = JSON.parse(str),
                  problems = obj.result,
                 speech = "";
+                if (problemNumber)
+                {
+                    problems = problems.filter(function (e) {
+                        return (e.number == problemNumber);
+                    });
+                }
                 if (state)
                 {
                     problems = problems.filter(function (e) {
@@ -261,10 +268,7 @@ function getProblemInfo(sysId) {
 function createProblem(assistant) {
     var description = assistant.getArgument('description');
     var urgency = assistant.getArgument('urgency');
-    console.log("description");
-    console.log(description);
-    console.log("urgency");
-    console.log(urgency);
+   
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = "https://dev19713.service-now.com/api/now/table/problem";
