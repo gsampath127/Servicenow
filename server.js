@@ -46,10 +46,11 @@ app.get('/', function (req, res) {
         'headers': {
             'Content-Type': 'application/json'
         },
-        'form':
+        'body':
             {
                 'short_description':'problem from postman', 'urgency':'3'
             },
+        json: true,
     }).on('response', function (response) {
         //console.log(response.statusCode);
         //console.log(response.headers['content-type']);
