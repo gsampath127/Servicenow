@@ -133,6 +133,7 @@ function getProblemInfo(sysId, assistant) {
 function getAllProblems(assistant)
 {
     var state = assistant.getArgument('state');
+    var urgency = assistant.getArgument('urgency');
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = "https://dev19713.service-now.com/api/now/table/problem";
@@ -155,15 +156,25 @@ function getAllProblems(assistant)
 
             response.on('end', function () {
                 var obj = JSON.parse(str),
-                 problems = obj.result;
+                 problems = obj.result,
+                speech = "";;
                 if (state)
                 {
                     problems = problems.filter(function (e) {
                         return (e.state == state);
                     });
                 }
-                var speech = "Please find below problems ";
-
+                if (urgency) {
+                    problems = problems.filter(function (e) {
+                        return (e.urgency == urgency);
+                    });
+                }
+                if (problems.length <= 0)
+                {
+                    speech = "Sorry!! Could not find the results";
+                }
+               
+                speech = "Please find below problems ";
                 for (var i = 0 ; i < problems.length ; i++)
                 {
                     speech = speech + problems[i].number + "describes on " + problems[i].short_description;
