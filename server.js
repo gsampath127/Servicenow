@@ -173,15 +173,9 @@ function getIncidentInfo(sysId, assistant)
                 //console.log(req.data);
                 console.log(str);
                 // your code here if you want to use the results !
-                var incident = JSON.parse(str);
-                console.log('incident');
-                console.log(incident);
-
-
-
-
-                //resolve(assistant.tell("Incident 1 Severity" + incident.result.agent));
-                resolve(assistant.tell("Incident 2 Severity" + incident.result.made_sla));
+                var problem = JSON.parse(str);
+                var speech = "This problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + sys_updated_by;
+                resolve(assistant.tell(speech));
             });
         });
 
