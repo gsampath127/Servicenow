@@ -34,7 +34,40 @@ console.log('Application started on port ' + app.get('port'));
 
 
 app.get('/', function (req, res) {
-    res.send("hello");
+    //res.send("hello");
+    var str = '';
+    var url = "https://dev19713.service-now.com/api/now/table/problem";
+    request.post(url, {
+        'auth': {
+            'user': 'admin',
+            'pass': 'SAMPATH18',
+            'sendImmediately': false
+        },
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+        'form':
+            {
+                'short_description':'problem from postman', 'urgency':'3'
+            },
+    }).on('response', function (response) {
+        //console.log(response.statusCode);
+        //console.log(response.headers['content-type']);
+        res.send(response);
+            
+        response.on('data', function (chunk) {
+            str += chunk;
+        });
+
+        response.on('end', function () {
+
+            var problem = JSON.parse(str);
+            var speech = "This new problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
+            
+        });
+    });
+
+
 });
 
 app.get('/getAllIncidents', function (req, res) {
