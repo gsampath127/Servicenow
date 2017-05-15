@@ -261,6 +261,10 @@ function getProblemInfo(sysId) {
 function createProblem(assistant) {
     var description = assistant.getArgument('description');
     var urgency = assistant.getArgument('urgency');
+    console.log("description");
+    console.log(description);
+    console.log("urgency");
+    console.log(urgency);
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = "https://dev19713.service-now.com/api/now/table/problem";
@@ -275,7 +279,7 @@ function createProblem(assistant) {
             },
             'body':
                 {
-                    'short_description':description, 'urgency':'2'
+                    'short_description':'herokuuuuu problem', 'urgency':'2'
                 },
             json: true,
         }).on('response', function (response) {
