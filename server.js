@@ -75,7 +75,7 @@ function InitializeAssistant(req, res) {
     var actionMap = new Map();
     actionMap.set(WELCOME_INTENT, welcomeIntent);
     actionMap.set(PROBLEM_INTENT, problemIntent);
-    actionMap.set(PROBLEM_ALL_INTENT, incidentIntent);
+    actionMap.set(PROBLEM_ALL_INTENT, problemAllIntent);
     //actionMap.set(NUMBER_INTENT, numberIntent);
     assistant.handleRequest(actionMap);
 
