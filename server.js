@@ -279,7 +279,7 @@ function createProblem(assistant) {
             },
             'body':
                 {
-                    'short_description':'herokuuuuu problem', 'urgency':'2'
+                    'short_description': description, 'urgency':urgency
                 },
             json: true,
         }).on('response', function (response) {
@@ -293,7 +293,7 @@ function createProblem(assistant) {
             response.on('end', function () {
 
                 var problem = JSON.parse(str);
-                var speech = "This new problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
+                var speech = "Great!! Your problem was created which describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
                 resolve(assistant.tell(speech));
             });
         });
