@@ -245,6 +245,8 @@ function craeateProblem(assistant) {
                     'short_description':description, 'urgency':urgency
                 },
         }).on('response', function (response) {
+            console.log(response.statusCode);
+            console.log(response.headers['content-type']);
             
             response.on('data', function (chunk) {
                 str += chunk;
