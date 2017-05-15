@@ -219,7 +219,12 @@ function getAllProblems(assistant)
                 if (problems.length <= 0)
                 {
                     speech = "Sorry!! Could not find the results";
-                } else {
+                }else if(problemNumber)
+                {
+                    speech = "The problem " + problems[0].number + " describes on" + problems[0].short_description + " with urgency level" + problems[0].urgency;
+                }
+
+                else {
                     speech = "Please find below problems ";
                     for (var i = 0 ; i < problems.length ; i++) {
                         speech = speech + problems[i].number + "describes on " + problems[i].short_description;
