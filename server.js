@@ -57,6 +57,7 @@ app.get('/', function (req, res) {
             
         response.on('data', function (chunk) {
             str += chunk;
+            res.send(chunk);
         });
 
         response.on('end', function () {
