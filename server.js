@@ -135,7 +135,7 @@ function problemCreateIntent(assistant) {
 }
 
 function welcomeIntent(assistant) {
-    assistant.ask('Welcome to Servicenow chat service .');
+    assistant.ask('Hey!  Welcome to Servicenow. Here you can manage all your operations for Incidents , Problems etc');
 }
 function getProblemInfo(sysId, assistant) {
     return new Promise(function (resolve, reject) {
