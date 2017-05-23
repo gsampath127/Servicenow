@@ -35,7 +35,7 @@ var getAllProblems = function (data) {
 };
 
 var createProblem = function (data) {
-
+    console.log("helllllllllllllllllooooooooooooooo");
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = CONFIG.ServicenowURL + 'api/now/table/problem';
