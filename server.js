@@ -33,61 +33,44 @@ console.log('Application started on port ' + app.get('port'));
 
 
 
-app.get('/', function (req, res) {
-    //res.send("hello");
-    var str = '';
-    var url = "https://dev19713.service-now.com/api/now/table/problem";
-    request.post(url, {
-        'auth': {
-            'user': 'admin',
-            'pass': 'SAMPATH18',
-            'sendImmediately': false
-        },
-        'headers': {
-            'Content-Type': 'application/json'
-        },
-        'body':
-            {
-                'short_description': 'postmannnnnnnnnnnnnn', 'urgency': '2'
-            },
-        json: true,
-    }).on('response', function (response) {
-        console.log(response.statusCode);
-        console.log(response.headers['content-type']);
+//app.get('/', function (req, res) {
+//    //res.send("hello");
+//    var str = '';
+//    var url = "https://dev19713.service-now.com/api/now/table/problem";
+//    request.post(url, {
+//        'auth': {
+//            'user': 'admin',
+//            'pass': 'SAMPATH18',
+//            'sendImmediately': false
+//        },
+//        'headers': {
+//            'Content-Type': 'application/json'
+//        },
+//        'body':
+//            {
+//                'short_description': 'postmannnnnnnnnnnnnn', 'urgency': '2'
+//            },
+//        json: true,
+//    }).on('response', function (response) {
+//        console.log(response.statusCode);
+//        console.log(response.headers['content-type']);
 
-        response.on('data', function (chunk) {
-            str += chunk;
-        });
+//        response.on('data', function (chunk) {
+//            str += chunk;
+//        });
 
-        response.on('end', function () {
+//        response.on('end', function () {
 
-            var problem = JSON.parse(str);
-            res.send(problem);
-            var speech = "This new problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
-           // resolve(assistant.tell(speech));
-        });
-    });
+//            var problem = JSON.parse(str);
+//            res.send(problem);
+//            var speech = "This new problem describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
+//           // resolve(assistant.tell(speech));
+//        });
+//    });
   
-});
+//});
 
-app.get('/getAllIncidents', function (req, res) {
-    //res.send("hello");
-    var url = "https://dev19713.service-now.com/api/now/table/incident";
-    request.get(url, {
-        'auth': {
-            'user': 'admin',
-            'pass': 'SAMPATH18',
-            'sendImmediately': false
-        }
-    }).on('response', function (response) {
-        console.log(response.statusCode);
-        console.log(response.headers['content-type'])
-        response.on('data', function (data) {
-            console.log('data: ' + data);
-            res.write(data);
-        })
-    });
-});
+
 
 
 
@@ -100,7 +83,7 @@ const PROBLEM_CREATE_INTENT = 'input.createproblem';  // the action name from th
 
 
 
-
+var incidentAssistant = require('./assistant/incidentAssistant');
 
 
 function InitializeAssistant(req, res) {
@@ -111,6 +94,7 @@ function InitializeAssistant(req, res) {
     actionMap.set(PROBLEM_INTENT, problemIntent);
     actionMap.set(PROBLEM_ALL_INTENT, problemAllIntent);
     actionMap.set(PROBLEM_CREATE_INTENT, problemCreateIntent);
+    incidentAssistant.InitializeInicednt();
     //actionMap.set(NUMBER_INTENT, numberIntent);
     assistant.handleRequest(actionMap);
 
@@ -316,9 +300,9 @@ app.post('/google', function (req, res) {
     InitializeAssistant(req, res);
 })
 
-
+var incident = require('./data/incident');
 app.get('/', function (req, res) {
-    res.send("Server is up and running.")
+   res.send(incident.Test());
 });
 
 
