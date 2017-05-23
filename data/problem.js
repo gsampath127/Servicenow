@@ -24,7 +24,9 @@ var getAllProblems = function (data) {
                 var obj = JSON.parse(str),
                  problems = obj.result;
                  problems = problems.filter(function (e) {
-                        return (e.number == data.problemNumber || e.state == data.state || e.urgency == data.urgency);
+                     return ((typeof data.problemNumber !== 'undefined' && e.number == data.problemNumber)
+                         || (typeof data.state !== 'undefined' && e.state == data.state)
+                         || (typeof data.urgency !== 'undefined' && e.urgency == data.urgency));
                     });
                 resolve(problems);
             });
