@@ -94,7 +94,7 @@ function InitializeAssistant(req, res) {
     actionMap.set(PROBLEM_INTENT, problemIntent);
     actionMap.set(PROBLEM_ALL_INTENT, problemAllIntent);
     actionMap.set(PROBLEM_CREATE_INTENT, problemCreateIntent);
-    incidentAssistant.InitializeInicednt();
+    incidentAssistant.InitializeInicednt(actionMap);
     //actionMap.set(NUMBER_INTENT, numberIntent);
     assistant.handleRequest(actionMap);
 
