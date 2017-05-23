@@ -31,7 +31,7 @@ function problemCreateIntent(assistant) {
 
         problemData.CreateProblem(postData)
             .then(function (data) {
-                var speech = "Great!! Your problem was created which describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
+                var speech = "Great!! Your problem was created which describes on " + data.short_description + " with Urgency level " + data.urgency + ", last updated on  " + data.sys_updated_on + " and updated by " + data.sys_updated_by;
                 resolve(assistant.tell(speech));
             }, function (err) {
                 console.log(err);
