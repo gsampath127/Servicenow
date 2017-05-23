@@ -17,10 +17,15 @@ function problemIntent(assistant) {
 
 }
 function problemAllIntent(assistant) {
+    var state = assistant.getArgument('state'),
+        urgency = assistant.getArgument('urgency'),
+        problemNumber = assistant.getArgument('problemNumber'),
+        filterData = { 'state': state, 'urgency': urgency, 'problemNumber': problemNumber };
+
 
     return new Promise(function (resolve, reject) {
         var speech = "";
-        problemData.GetAllProblems(postData)
+        problemData.GetAllProblems(filterData)
             .then(function (data) {
 
                 if (data.length <= 0) {
@@ -37,7 +42,7 @@ function problemAllIntent(assistant) {
               
                 resolve(assistant.tell(speech));
             }, function (err) {
-
+                cons
                 resolve(assistant.tell("Sorry!! some error occured in fetching problems. Please try again!!"));
             });
 

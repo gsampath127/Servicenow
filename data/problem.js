@@ -53,9 +53,7 @@ var createProblem = function (data) {
 
             json: true,
         }).on('response', function (response) {
-            console.log(response.statusCode);
-            console.log(response.headers['content-type']);
-
+           
             response.on('data', function (chunk) {
                 str += chunk;
             });
