@@ -22,26 +22,11 @@ var getAllIncidents = function (data) {
 
             response.on('end', function () {
                 var obj = JSON.parse(str),
-                 problems = obj.result,
-                speech = "";
-                if (problemNumber) {
-                    problems = problems.filter(function (e) {
-                        return (e.number == data.problemNumber || e.state == data.state || e.urgency == data.urgency);
-                    });
-                }
-                //if (state) {
-                //    problems = problems.filter(function (e) {
-                //        return (e.state == state);
-                //    });
-                //}
-                //if (urgency) {
-                //    problems = problems.filter(function (e) {
-                //        return (e.urgency == urgency);
-                //    });
-                //}
-
-
-
+                 problems = obj.result;
+                 problems = problems.filter(function (e) {
+                    return (e.number == data.problemNumber || e.state == data.state || e.urgency == data.urgency);
+                });
+              
                 resolve(problems);
             });
         }).on('error', function (err) {
@@ -92,7 +77,7 @@ var createIncident = function (data) {
 var getIncident = function (sysId) {
     return new Promise(function (resolve, reject) {
         var str = '';
-        var url =  CONFIG.ServicenowURL +'api/now/table/problem' + '/' + sysId;
+        var url =  CONFIG.ServicenowURL +'api/now/table/incident' + '/' + sysId;
         request.get(url, {
             'auth': {
                 'user': CONFIG.username,
