@@ -65,7 +65,7 @@ var createProblem = function (data) {
 
                 var problem = JSON.parse(str);
 
-                resolve(problem);
+                resolve(problem.result);
             });
         }).on('error', function (err) {
             reject(err);
