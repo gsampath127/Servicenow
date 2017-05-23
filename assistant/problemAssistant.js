@@ -34,7 +34,7 @@ function problemCreateIntent(assistant) {
                 var speech = "Great!! Your problem was created which describes on " + problem.result.short_description + " with Urgency level " + problem.result.urgency + ", last updated on  " + problem.result.sys_updated_on + " and updated by " + problem.result.sys_updated_by;
                 resolve(assistant.tell(speech));
             }, function (err) {
-                
+                console.log(err);
                 resolve(assistant.tell("Sorry!! some error occured in creating a problem. Please try again!!"));
             });
 

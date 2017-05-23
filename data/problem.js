@@ -67,7 +67,7 @@ var createProblem = function (data) {
                 resolve(problem);
             });
         }).on('error', function (err) {
-            reject(err.statusText);
+            reject(err);
         });
 
     });
