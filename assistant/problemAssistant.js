@@ -18,7 +18,30 @@ function problemIntent(assistant) {
 }
 function problemAllIntent(assistant) {
 
-    return getAllProblems(assistant);
+    return new Promise(function (resolve, reject) {
+        var speech = "";
+        problemData.GetAllProblems(postData)
+            .then(function (data) {
+
+                if (data.length <= 0) {
+                    speech = "Sorry!! Could not find the results";
+                } else if (data.length==1) {
+                    speech = "The problem " + data[0].number + " describes on" + data[0].short_description + " with urgency level" + data[0].urgency;
+                }
+                else {
+                    speech = "Please find below data ";
+                    for (var i = 0 ; i < data.length ; i++) {
+                        speech = speech +" "+ data[i].number + " describes on " + data[i].short_description;
+                    }
+                }
+              
+                resolve(assistant.tell(speech));
+            }, function (err) {
+
+                resolve(assistant.tell("Sorry!! some error occured in fetching problems. Please try again!!"));
+            });
+
+    });
 
 }
 function problemCreateIntent(assistant) {
@@ -34,7 +57,7 @@ function problemCreateIntent(assistant) {
                 var speech = "Great!! Your problem was created which describes on " + data.short_description + " with Urgency level " + data.urgency + ", last updated on  " + data.sys_updated_on + " and updated by " + data.sys_updated_by;
                 resolve(assistant.tell(speech));
             }, function (err) {
-                console.log(err);
+               
                 resolve(assistant.tell("Sorry!! some error occured in creating a problem. Please try again!!"));
             });
 
