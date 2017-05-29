@@ -49,18 +49,16 @@ var contacttype = {
 module.exports.Urgency = urgency;
 
 module.exports.getValue = function (object, value) {
-    console.log(object);
-    console.log(value);
+    
     var val = "";
     for (var property in object) {
-        console.log(property);
-        console.log(object['High'].description);
-        console.log(String(property));
-        if (object.hasOwnProperty(property) && object['High'].description==value) {
-            val = object['High'].value;
+       
+        if (object.hasOwnProperty(property) &&
+            object[String(property)].description.indexOf(value.toLowerCase()) != -1) {
+            val = object[String(property)].value;
         }
     }
-    console.log(val);
+   
     return val;
 };
 

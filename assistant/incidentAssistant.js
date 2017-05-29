@@ -1,4 +1,4 @@
-﻿
+﻿var incidentData = require('../data/incident');
 var constants = require('../constants');
 
 
@@ -61,7 +61,7 @@ function incidentCreateIntent(assistant) {
 
     return new Promise(function (resolve, reject) {
 
-        problemData.CreateProblem(postData)
+        incidentData.createIncident(postData)
             .then(function (data) {
                 var speech = "Great!! Your ticket\incident was created which describes on " + data.short_description + " with Urgency level " + data.urgency + ", last updated on  " + data.sys_updated_on + " and updated by " + data.sys_updated_by;
                 resolve(assistant.tell(speech));
