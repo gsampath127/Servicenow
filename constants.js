@@ -49,9 +49,11 @@ var contacttype = {
 module.exports.Urgency = urgency;
 
 module.exports.getValue = function (object, value) {
+    console.log(object);
+    console.log(value);
     for (var property in object) {
         if (object.hasOwnProperty(property) && property.description == value) {
-            return property.description;
+            return property.value;
         }
     }
 };
@@ -59,7 +61,7 @@ module.exports.getValue = function (object, value) {
 module.exports.getDescription = function (object, value) {
     for (var property in object) {
         if (object.hasOwnProperty(property) && property.value == value) {
-            return property.value;
+            return property.description;
         }
     }
 };
