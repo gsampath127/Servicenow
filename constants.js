@@ -51,11 +51,14 @@ module.exports.Urgency = urgency;
 module.exports.getValue = function (object, value) {
     console.log(object);
     console.log(value);
+    var val = "";
     for (var property in object) {
         if (object.hasOwnProperty(property) && property.description == value) {
-            return property.value;
+            val= property.value;
         }
     }
+    console.log(val);
+    return val;
 };
 
 module.exports.getDescription = function (object, value) {
