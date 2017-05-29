@@ -1,4 +1,8 @@
-﻿const INCIDENT_INTENT = 'input.incident';  // the action name from the API.AI intent
+﻿
+var constants = require('../constants');
+
+
+const INCIDENT_INTENT = 'input.incident';  // the action name from the API.AI intent
 const INCIDENT_ALL_INTENT = 'input.incidents';  // the action name from the API.AI intent
 const INCIDENT_CREATE_INTENT = 'input.createincident';  // the action name from the API.AI intent
 
@@ -16,9 +20,9 @@ var initializeIncident = function (actionMap) {
 
 function incidentAllIntent(assistant) {
     var state = assistant.getArgument('state'),
-        urgency = assistant.getArgument('urgency'),
+        urgency = constants.gatValue(constants.Urgency, assistant.getArgument('urgency')),
         incidentNumber = assistant.getArgument('incidentNumber'),
-        filterData = { 'state': state, 'urgency': urgency, 'incidentNumber': incidentNumber };
+        filterData = { 'state': 1, 'urgency': urgency, 'incidentNumber': incidentNumber };
 
 
     return new Promise(function (resolve, reject) {
@@ -49,9 +53,11 @@ function incidentAllIntent(assistant) {
 }
 function incidentCreateIntent(assistant) {
     var description = assistant.getArgument('description'),
-        urgency = assistant.getArgument('urgency');
+        urgency = constants.gatValue(constants.Urgency, assistant.getArgument('urgency')),
+        category = assistant.getArgument('category');
 
     var postData = { 'short_description': description, 'urgency': urgency };
+    console.log(postData);
 
     return new Promise(function (resolve, reject) {
 

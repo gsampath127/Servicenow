@@ -1,10 +1,11 @@
-﻿const urgency = {
-    High: 1,
-    Medium: 2,
-    Low: 3
+﻿var urgency = {
+    High: {description : "high" , value : 1},
+    Medium: { description: "medium", value: 2 },
+    Low: { description: "low", value: 3 }
+   
 };
 
-const state = {
+var state = {
     New: 1,
     Active: 2,
     AwaitingProblem: 3,
@@ -14,12 +15,12 @@ const state = {
     Closed:7
 
 };
-const impact = {
+var impact = {
     High: 1,
     Medium: 2,
     Low: 3
 };
-const priority = {
+var priority = {
     Critical: 1,
     High: 2,
     Moderate: 3,
@@ -27,7 +28,7 @@ const priority = {
     Planning:5,
     Moderate: 3,
 };
-const category = {
+var category = {
     Request: 1,
     InquiryHelp: 2,
     Software: 3,
@@ -35,11 +36,30 @@ const category = {
     Network: 5,
     Database:6
 };
-const contacttype = {
+var contacttype = {
     Email: 1,
     Phone: 2,
     SelfService: 3,
     WalkIn:4
 
 
+};
+
+
+module.exports.Urgency = urgency;
+
+module.exports.getValue = function (object, value) {
+    for (var property in object) {
+        if (object.hasOwnProperty(property) && property.description == value) {
+            return property.description;
+        }
+    }
+};
+
+module.exports.getDescription = function (object, value) {
+    for (var property in object) {
+        if (object.hasOwnProperty(property) && property.value == value) {
+            return property.value;
+        }
+    }
 };
