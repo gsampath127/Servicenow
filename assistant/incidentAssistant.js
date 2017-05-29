@@ -10,7 +10,7 @@ const INCIDENT_CREATE_INTENT = 'input.createincident';  // the action name from 
 var initializeIncident = function (actionMap) {
    
     actionMap.set(INCIDENT_ALL_INTENT, incidentAllIntent);
-    actionMap.set(PROBLEM_CREATE_INTENT, incidentCreateIntent);
+    actionMap.set(INCIDENT_CREATE_INTENT, incidentCreateIntent);
 };
 
 //function incidentAllIntent(assistant) {
