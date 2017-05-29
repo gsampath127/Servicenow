@@ -54,7 +54,7 @@ module.exports.getValue = function (object, value) {
     for (var property in object) {
        
         if (object.hasOwnProperty(property) &&
-            object[String(property)].description.indexOf(value.toLowerCase()) != -1) {
+            object[String(property)].description.indexOf(String(value).toLowerCase()) != -1) {
             val = object[String(property)].value;
         }
     }
