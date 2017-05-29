@@ -55,7 +55,7 @@ module.exports.getValue = function (object, value) {
     for (var property in object) {
         console.log(property);
         console.log(object['High']);
-        if (object.hasOwnProperty(property) && object.property.description == value) {
+        if (object.hasOwnProperty(property) ) {
             val= property.value;
         }
     }
