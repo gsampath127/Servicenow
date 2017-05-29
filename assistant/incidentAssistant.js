@@ -53,7 +53,7 @@ function incidentAllIntent(assistant) {
 }
 function incidentCreateIntent(assistant) {
     var description = assistant.getArgument('description'),
-        urgency = constants.gatValue(constants.Urgency, assistant.getArgument('urgency')),
+        urgency = constants.getValue(constants.Urgency, assistant.getArgument('urgency')),
         category = assistant.getArgument('category');
 
     var postData = { 'short_description': description, 'urgency': urgency };
