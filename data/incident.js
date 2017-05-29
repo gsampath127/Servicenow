@@ -55,9 +55,7 @@ var createIncident = function (data) {
                 
             json: true,
         }).on('response', function (response) {
-            console.log(response.statusCode);
-            console.log(response.headers['content-type']);
-
+           
             response.on('data', function (chunk) {
                 str += chunk;
             });
@@ -66,7 +64,7 @@ var createIncident = function (data) {
 
                 var problem = JSON.parse(str);
                
-                resolve(problem);
+                resolve(problem.result);
             });
         }).on('error', function (err) {
             reject(err.statusText);
