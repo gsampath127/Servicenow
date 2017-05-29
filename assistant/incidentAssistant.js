@@ -63,7 +63,7 @@ function incidentCreateIntent(assistant) {
 
         incidentData.CreateIncident(postData)
             .then(function (data) {
-                var speech = "Great!! Your ticket\incident was created which describes on " + data.short_description + " with Urgency level " + data.urgency + ", last updated on  " + data.sys_updated_on + " and updated by " + data.sys_updated_by;
+                var speech = "Great!! Your ticket\incident was created which describes on " + data.short_description + " with Urgency level " + constants.getDescription(constants.Urgency,data.urgency) + ", last updated on  " + data.sys_updated_on + " and updated by " + data.sys_updated_by;
                 resolve(assistant.tell(speech));
             }, function (err) {
 

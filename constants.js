@@ -64,8 +64,8 @@ module.exports.getValue = function (object, value) {
 
 module.exports.getDescription = function (object, value) {
     for (var property in object) {
-        if (object.hasOwnProperty(property) && property.value == value) {
-            return property.description;
+        if (object.hasOwnProperty(property) && object[String(property)].value == value) {
+            return object[String(property)].description;
         }
     }
 };
