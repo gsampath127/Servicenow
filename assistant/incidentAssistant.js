@@ -20,7 +20,7 @@ var initializeIncident = function (actionMap) {
 
 function incidentAllIntent(assistant) {
     var state = assistant.getArgument('state'),
-        urgency = constants.gatValue(constants.Urgency, assistant.getArgument('urgency')),
+        urgency = constants.getValue(constants.Urgency, assistant.getArgument('urgency')),
         incidentNumber = assistant.getArgument('incidentNumber'),
         filterData = { 'state': 1, 'urgency': urgency, 'incidentNumber': incidentNumber };
 
