@@ -54,7 +54,7 @@ function incidentAllIntent(assistant) {
 function incidentCreateIntent(assistant) {
     var description = assistant.getArgument('description'),
         urgency = constants.getValue(constants.Urgency, assistant.getArgument('urgency')),
-        category = assistant.getArgument('category');
+        category = constants.getValue(constants.Category,assistant.getArgument('category'));
 
     var postData = { 'short_description': description, 'urgency': urgency };
     console.log(postData);
@@ -63,7 +63,7 @@ function incidentCreateIntent(assistant) {
 
         incidentData.CreateIncident(postData)
             .then(function (data) {
-                var speech = "Great!! Your ticket\incident was created which describes on " + data.short_description + " with Urgency level " + constants.getDescription(constants.Urgency,data.urgency) + ", last updated on  " + data.sys_updated_on + " and updated by " + data.sys_updated_by;
+                var speech = "Great!! Your ticket was created which describes on " + data.short_description + " with Urgency level " + constants.getDescription(constants.Urgency,data.urgency) + ", last updated on  " + data.sys_updated_on + " and updated by " + data.sys_updated_by;
                 resolve(assistant.tell(speech));
             }, function (err) {
 

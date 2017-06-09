@@ -29,12 +29,12 @@ var priority = {
     Moderate: 3,
 };
 var category = {
-    Request: 1,
-    InquiryHelp: 2,
-    Software: 3,
-    Hardware: 4,
-    Network: 5,
-    Database:6
+    Request: { description: "request", value: 1 },
+    InquiryHelp: { description: "inquiry help", value: 2 },
+    Software: { description: "software", value: 3 },
+    Hardware: { description: "hardware", value: 4 },
+    Network: { description: "network", value: 5 },
+    Database:{ description: "database", value: 6 }
 };
 var contacttype = {
     Email: 1,
@@ -46,13 +46,13 @@ var contacttype = {
 };
 
 
+module.exports.Category = category;
 module.exports.Urgency = urgency;
 
 module.exports.getValue = function (object, value) {
     
     var val = "";
     for (var property in object) {
-       
         if (object.hasOwnProperty(property) &&
             object[String(property)].description.indexOf(String(value).toLowerCase()) != -1) {
             val = object[String(property)].value;
