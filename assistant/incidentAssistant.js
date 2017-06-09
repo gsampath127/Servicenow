@@ -23,13 +23,13 @@ function incidentAllIntent(assistant) {
         urgency = constants.getValue(constants.Urgency, assistant.getArgument('urgency')),
         incidentNumber = assistant.getArgument('incidentNumber'),
         filterData = { 'state': 1, 'urgency': urgency, 'incidentNumber': incidentNumber };
-
+    console.log(filterData);
 
     return new Promise(function (resolve, reject) {
         var speech = "";
         problemData.GetAllProblems(filterData)
             .then(function (data) {
-
+                console.log(data);
                 if (data.length <= 0) {
                     speech = "Sorry!! Could not find the results";
                 } else if (data.length == 1) {
