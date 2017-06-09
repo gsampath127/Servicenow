@@ -29,7 +29,7 @@ function incidentAllIntent(assistant) {
         var speech = "";
         incidentData.GetAllIncidents(filterData)
             .then(function (data) {
-                console.log(data);
+               
                 if (data.length <= 0) {
                     speech = "Sorry!! Could not find the results";
                 } else if (data.length == 1) {
@@ -38,13 +38,13 @@ function incidentAllIntent(assistant) {
                 else {
                     speech = "Please find below data ";
                     for (var i = 0 ; i < data.length ; i++) {
-                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description;
+                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description + " with urgency level" +constants.getDescription(constants.Urgency, data[0].urgency);
                     }
                 }
 
                 resolve(assistant.tell(speech));
             }, function (err) {
-                cons
+                
                 resolve(assistant.tell("Sorry!! some error occured in fetching tickets/incidents. Please try again!!"));
             });
 
