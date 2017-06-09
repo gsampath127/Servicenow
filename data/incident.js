@@ -23,12 +23,12 @@ var getAllIncidents = function (data) {
 
             response.on('end', function () {
                 var obj = JSON.parse(str),
-                 problems = obj.result;
-                 problems = problems.filter(function (e) {
-                    return (e.number == data.problemNumber || e.state == data.state || e.urgency == data.urgency);
+                 incidents = obj.result;
+                incidents = incidents.filter(function (e) {
+                     return (e.number == data.incidentNumber || e.state == data.state || e.urgency == data.urgency);
                 });
               
-                resolve(problems);
+                resolve(incidents);
             });
         }).on('error', function (err) {
             reject(err.statusText);
