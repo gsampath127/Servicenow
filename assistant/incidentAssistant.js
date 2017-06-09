@@ -33,7 +33,7 @@ function incidentAllIntent(assistant) {
                 if (data.length <= 0) {
                     speech = "Sorry!! Could not find the results";
                 } else if (data.length == 1) {
-                    speech = "The incident " + data[0].number + " describes on" + data[0].short_description + " with urgency level" + data[0].urgency;
+                    speech = "The incident " + data[0].number + " describes on " + data[0].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[0].urgency);
                 }
                 else {
                     speech = "Please find below data ";
