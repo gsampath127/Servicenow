@@ -27,7 +27,7 @@ function incidentAllIntent(assistant) {
 
     return new Promise(function (resolve, reject) {
         var speech = "";
-        incidentData.GetAllProblems(filterData)
+        incidentData.GetAllIncidents(filterData)
             .then(function (data) {
                 console.log(data);
                 if (data.length <= 0) {
