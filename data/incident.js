@@ -28,6 +28,8 @@ var getAllIncidents = function (data) {
                 console.log(incidents.length);
                 incidents = incidents.filter(function (item) {
                     for (var key in data) {
+                        console.log(key);
+                        console.log(item);
                         if (item[key] === undefined || item[key] != data[key])
                             return false;
                     }
