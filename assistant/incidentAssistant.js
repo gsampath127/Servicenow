@@ -38,7 +38,7 @@ function incidentAllIntent(assistant) {
                 else {
                     speech = "Please find below data ";
                     for (var i = 0 ; i < data.length ; i++) {
-                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description + " with urgency level" +constants.getDescription(constants.Urgency, data[0].urgency);
+                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description + " with urgency level " +constants.getDescription(constants.Urgency, data[0].urgency);
                     }
                 }
 
@@ -56,9 +56,8 @@ function incidentCreateIntent(assistant) {
         urgency = constants.getValue(constants.Urgency, assistant.getArgument('urgency')),
         category = assistant.getArgument('category');
 
-    var postData = { 'short_description': description, 'urgency': urgency };
-    console.log(postData);
-
+    var postData = { 'short_description':String(description), 'urgency': urgency };
+   
     return new Promise(function (resolve, reject) {
 
         incidentData.CreateIncident(postData)

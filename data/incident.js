@@ -2,8 +2,6 @@
 var request = require('request');
 
 var getAllIncidents = function (data) {
-    console.log("In Data");
-    console.log(data);
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = CONFIG.ServicenowURL + 'api/now/table/incident';
@@ -25,13 +23,9 @@ var getAllIncidents = function (data) {
             response.on('end', function () {
                 var obj = JSON.parse(str),
                  incidents = obj.result;
-                incidents = incidents.filter(function (i) { return i.state==7});
-                console.log(incidents.length);
-                incidents = incidents.filter(function (item) {
+                 incidents = incidents.filter(function (item) {
                     for (var key in data) {
-                        console.log("item");
-                        console.log(item[key]);
-
+                       
                         if (data[key] && (item[key] === undefined || item[key] != data[key]))
                             return false;
                     }
