@@ -22,7 +22,7 @@ function incidentAllIntent(assistant) {
     var state = assistant.getArgument('state'),
         urgency = constants.getValue(constants.Urgency, assistant.getArgument('urgency')),
         incidentNumber = assistant.getArgument('incidentNumber'),
-        filterData = { 'state': state, 'urgency': urgency, 'incidentNumber': incidentNumber };
+        filterData = { 'state': state, 'urgency': urgency, 'number': incidentNumber };
     console.log(filterData);
 
     return new Promise(function (resolve, reject) {
