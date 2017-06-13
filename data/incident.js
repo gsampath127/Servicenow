@@ -26,8 +26,13 @@ var getAllIncidents = function (data) {
                 var obj = JSON.parse(str),
                  incidents = obj.result;
                 console.log(incidents.length);
-                incidents = incidents.filter(function (e) {
-                     return ((e.number == data.incidentNumber && data.incidentNumber!=null) || ( e.state == data.state && data.state!=null)|| (e.urgency == data.urgency && data.urgency!=''));
+                incidents = incidents.filter(function (item) {
+                    for (var key in data) {
+                        if (item[key] === undefined || item[key] != filter[key])
+                            return false;
+                    }
+                    return true;
+                    // return ((e.number == data.incidentNumber && data.incidentNumber!=null) || ( e.state == data.state && data.state!=null)|| (e.urgency == data.urgency && data.urgency!=''));
                 });
                 console.log('incidents.length');
                 console.log(incidents.length);
