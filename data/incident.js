@@ -26,7 +26,7 @@ var getAllIncidents = function (data) {
                 var obj = JSON.parse(str),
                  incidents = obj.result;
                 incidents = incidents.filter(function (e) {
-                     return (e.number == data.incidentNumber && data.incidentNumber) || ( e.state == data.state && data.state)|| (e.urgency == data.urgency && data.urgency));
+                     return ((e.number == data.incidentNumber && data.incidentNumber) || ( e.state == data.state && data.state)|| (e.urgency == data.urgency && data.urgency));
                 });
               
                 resolve(incidents);
