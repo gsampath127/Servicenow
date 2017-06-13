@@ -4,7 +4,7 @@ var request = require('request');
 var getAllIncidents = function (data) {
     return new Promise(function (resolve, reject) {
         var str = '';
-        var url = CONFIG.ServicenowURL + 'api/now/table/incident';
+        var url = CONFIG.ServicenowURL + 'api/now/table/incident?sysparam_fields=number,short_description,urgency,state';
         request.get(url, {
             'auth': {
                 'user': CONFIG.username,
@@ -32,8 +32,7 @@ var getAllIncidents = function (data) {
                     return true;
                     // return ((e.number == data.incidentNumber && data.incidentNumber!=null) || ( e.state == data.state && data.state!=null)|| (e.urgency == data.urgency && data.urgency!=''));
                 });
-                console.log('incidents.length');
-                console.log(incidents.length);
+               
               
                 resolve(incidents);
             });
@@ -113,11 +112,46 @@ var getIncident = function (sysId) {
 var Test = function () {
     return "Testinggg";
 };
+var updateIncident = function (sysId, updateData) {
 
+    return new Promise(function (resolve, reject) {
+        var str = '';
+        var url = CONFIG.ServicenowURL + 'api/now/table/incident/' + sysId;
+        request.post(url, {
+            'auth': {
+                'user': CONFIG.username,
+                'pass': CONFIG.password,
+                'sendImmediately': false
+            },
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+            'body': updateData,
+
+            json: true,
+        }).on('response', function (response) {
+
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+
+            response.on('end', function () {
+
+                var problem = JSON.parse(str);
+
+                resolve(problem.result);
+            });
+        }).on('error', function (err) {
+            reject(err.statusText);
+        });
+
+    });
+};
 
 module.exports.GetAllIncidents = getAllIncidents;
 module.exports.CreateIncident = createIncident;
 module.exports.GetIncident = getIncident;
+module.exports.CloseIncident = updateIncident;
 module.exports.Test = Test;
 
    
