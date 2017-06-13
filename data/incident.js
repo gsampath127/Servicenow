@@ -31,7 +31,8 @@ var getAllIncidents = function (data) {
                     for (var key in data) {
                         console.log("item");
                         console.log(item[key]);
-                        if (item[key] === undefined || item[key] != data[key])
+
+                        if (data[key] && (item[key] === undefined || item[key] != data[key]))
                             return false;
                     }
                     return true;
