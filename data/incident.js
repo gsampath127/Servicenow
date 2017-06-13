@@ -25,11 +25,12 @@ var getAllIncidents = function (data) {
             response.on('end', function () {
                 var obj = JSON.parse(str),
                  incidents = obj.result;
+                incidents = incidents.filter(function (i) { return i.state==7});
                 console.log(incidents.length);
                 incidents = incidents.filter(function (item) {
                     for (var key in data) {
-                        console.log(key);
-                        console.log(item);
+                        console.log("item");
+                        console.log(item[key]);
                         if (item[key] === undefined || item[key] != data[key])
                             return false;
                     }
