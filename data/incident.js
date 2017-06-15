@@ -113,11 +113,13 @@ var Test = function () {
     return "Testinggg";
 };
 var updateIncident = function (sysId, updateData) {
+    console.log(sysId);
+    console.log(updateData);
 
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = CONFIG.ServicenowURL + 'api/now/table/incident/' + sysId;
-        request.post(url, {
+        request.put(url, {
             'auth': {
                 'user': CONFIG.username,
                 'pass': CONFIG.password,

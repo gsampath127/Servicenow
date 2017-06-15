@@ -83,8 +83,7 @@ function incidentCloseIntent(assistant) {
 
         incidentData.GetAllIncidents(postData)
             .then(function (data) {
-                console.log("data");
-                console.log(data);
+                
                 incidentData.CloseIncident(data[0].sys_id,updateData).then(function (item) {
                     var speech = "Great!! Your ticket " + item.number + "was closed which describes on " + item.short_description;
                     resolve(assistant.tell(speech));
