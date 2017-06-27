@@ -169,7 +169,7 @@ function assignIncidentIntent(assistant) {
                           // incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
 
                              //  console.log(assignedUser.name);
-                            var speech = "Great!! The ticket " + number + "  which describes on " + item.short_description + " assigned from " + prevUser.name + " to " + name;
+                            var speech = "Great!! The ticket " + number + "  which describes on " + item.short_description + " assigned from " + prevUser.name + " to " + user;
                         // var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
                                resolve(assistant.tell(speech));
                             }, function (err) {
