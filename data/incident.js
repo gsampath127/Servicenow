@@ -251,7 +251,7 @@ var getUserByName = function (name) {
                 var obj = JSON.parse(str),
                  users = obj.result;
 
-                resolve(users);
+                resolve(users[0]);
             });
         }).on('error', function (err) {
             reject(err.statusText);

@@ -154,33 +154,30 @@ function assignIncidentIntent(assistant) {
     return new Promise(function (resolve, reject) {
         incidentData.GetIncident(number).then(function (incident) {
             var previousIncidentData = incident;
-            console.log("incident.");
            
-            
             incidentData.GetUserByName(String(user)).then(function (userData) {
-                console.log("user.");
-                console.log(userData);
+               
 
                     // Updating the incident
                     var updateData = { assigned_to: userData.sys_id };
                     incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
                         
 
-                       // incidentData.GetUser(incident[0].assigned_to.value).then(function (prevUser) {
+                        incidentData.GetUser(incident[0].assigned_to.value).then(function (prevUser) {
                             
 
-                           // incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
+                           incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
 
-                              //  console.log(assignedUser.name);
-                                //var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
+                               console.log(assignedUser.name);
+                                var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
                                 resolve(assistant.tell("Testing allllllllll"));
                             }, function (err) {
 
                                 resolve(assistant.tell("Sorry!! some error occured in assigning  a incident. Please try again!!"));
 
-                          //  });
+                            });
 
-                       // });
+                        });
   
                     });
                 });
