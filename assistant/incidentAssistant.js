@@ -168,7 +168,7 @@ function assignIncidentIntent(assistant) {
                     incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
                         console.log("after assigned");
                         
-                        incidentData.GetUser(item.assigned_to.value).then(function (d) { console.log(d); assignedUser = d; });
+                        incidentData.GetUser(item.assigned_to.value).then(function (d) { assignedUser = d; });
                         console.log(assignedUser.name);
                         var speech = "Great!! " + previousIncidentData[0].number + " ticket was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
                         resolve(assistant.tell(speech));
