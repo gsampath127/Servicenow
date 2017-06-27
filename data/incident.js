@@ -217,7 +217,7 @@ var getUser = function (sysId) {
                 var obj = JSON.parse(str),
                  users = obj.result;
                
-                resolve(users[0]);
+                resolve(users);
             });
         }).on('error', function (err) {
             reject(err.statusText);
