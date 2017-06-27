@@ -83,10 +83,11 @@ var createIncident = function (data) {
     });
 };
 
-var getIncident = function (sysId) {
+var getIncident = function (number) {
     return new Promise(function (resolve, reject) {
         var str = '';
-        var url =  CONFIG.ServicenowURL +'api/now/table/incident' + '/' + sysId;
+        var url = CONFIG.ServicenowURL + 'api/now/table/incident?sysparm_query=number=' + number;
+       
         request.get(url, {
             'auth': {
                 'user': CONFIG.username,
@@ -104,8 +105,8 @@ var getIncident = function (sysId) {
 
             response.on('end', function () {
 
-                var problem = JSON.parse(str);
-               resolve(problem);
+                var incident = JSON.parse(str);
+                resolve(incident.result[0]);
             });
         }).on('error', function (err) {
             reject(err.statusText);
