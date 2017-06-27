@@ -153,7 +153,9 @@ function assignIncidentIntent(assistant) {
         incidentPostData = { 'number': number };
     return new Promise(function (resolve, reject) {
         incidentData.GetIncident(number).then(function (incident) {
-            var previousIncidentData = incident[0];
+            var previousIncidentData = incident;
+            console.log("incident.");
+            console.log(incident);
             
             incidentData.GetUsers(userPostData).then(function (userData) {
                   
