@@ -197,7 +197,7 @@ var getUsers = function (data) {
 var getUser = function (sysId) {
     return new Promise(function (resolve, reject) {
         var str = '';
-        var url = CONFIG.ServicenowURL + 'api/now/table/sys_user/'+sysId+'/?sysparam_fields=name,gender,user_name,sys_id,first_name,email,last_name';
+        var url = CONFIG.ServicenowURL + 'api/now/table/sys_user/?sysparam_fields=name,gender,user_name,sys_id,first_name,email,last_name&sys_id='+sysId;
         request.get(url, {
             'auth': {
                 'user': CONFIG.username,
