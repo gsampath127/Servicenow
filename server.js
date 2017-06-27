@@ -112,7 +112,7 @@ app.post('/google', function (req, res) {
 
 var incident = require('./data/incident');
 app.get('/', function (req, res) {
-   res.send(incident.Test());
+  // res.send(incident.Test());
 });
 
 
