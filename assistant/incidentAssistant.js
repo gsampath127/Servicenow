@@ -163,13 +163,14 @@ function assignIncidentIntent(assistant) {
                     incidentData.UpdateIncident(incident.sys_id, updateData).then(function (item) {
                         
 
-                        incidentData.GetUser(incident.assigned_to.value).then(function (prevUser) {
+                        //incidentData.GetUser(incident.assigned_to.value).then(function (prevUser) {
                             
 
-                           incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
+                          // incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
 
                                console.log(assignedUser.name);
-                                var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
+                               var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned  to" + user;
+                        // var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
                                 resolve(speech);
                             }, function (err) {
 
@@ -177,9 +178,9 @@ function assignIncidentIntent(assistant) {
 
                             });
 
-                        });
+                       // });
   
-                    });
+                    //});
                 });
 
         });
