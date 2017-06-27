@@ -114,9 +114,7 @@ var getIncident = function (sysId) {
     });
 };
 var updateIncident = function (sysId, updateData) {
-    console.log(sysId);
-    console.log(updateData);
-
+   
     return new Promise(function (resolve, reject) {
         var str = '';
         var url = CONFIG.ServicenowURL + 'api/now/table/incident/' + sysId;
@@ -199,7 +197,7 @@ var getUsers = function (data) {
 module.exports.GetAllIncidents = getAllIncidents;
 module.exports.CreateIncident = createIncident;
 module.exports.GetIncident = getIncident;
-module.exports.CloseIncident = updateIncident;
+module.exports.UpdateIncident = updateIncident;
 module.exports.GetUsers = getUsers;
 
    
