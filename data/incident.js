@@ -201,6 +201,5 @@ module.exports.CreateIncident = createIncident;
 module.exports.GetIncident = getIncident;
 module.exports.CloseIncident = updateIncident;
 module.exports.GetUsers = getUsers;
-module.exports.Test = Test;
 
    
