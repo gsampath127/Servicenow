@@ -151,28 +151,31 @@ function assignIncidentIntent(assistant) {
         userPostData = { 'name': String(user) },
         incidentPostData = { 'number': number };
     return new Promise(function (resolve, reject) {
-        incidentData.GetAllIncidents(incidentPostData).then(function (incidentData) {
-            var previousIncidentData = incidentData[0];
+        incidentData.GetAllIncidents(incidentPostData).then(function (incident) {
+            var previousIncidentData = incident[0];
             console.log("before assigned");
+            console.log(previousIncidentData.assigned_to);
            // console.log(previousIncidentData);
             incidentData.GetUsers(userPostData).then(function (userData) {
                     var userSysId = userData[0].sys_id;
                     console.log(userSysId);
                     // Updating the incident
                     var updateData = { assigned_to: { value: userSysId } };
-                    //incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
-                    //    console.log("after assigned");
-                    //    console.log(item);
-                    //    var speech = "Great!! Your ticket " + item.number + "was assigned which describes on " + item.short_description;
-                    //    resolve(assistant.tell(speech));
-                    //}, function (err) {
+                    incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
+                        console.log("after assigned");
+                        console.log(item.assigned_to);
+                        var speech = "Great!! Your ticket " + item.number + "was assigned which describes on " + item.short_description;
+                        resolve(assistant.tell(speech));
+                    }, function (err) {
 
-                    //    resolve(assistant.tell("Sorry!! some error occured in assigning  a incident. Please try again!!"));
-                    //});
+                        resolve(assistant.tell("Sorry!! some error occured in assigning  a incident. Please try again!!"));
+                    });
                 });
 
         });
 
+
+        resolve("heloo");
     });
 
 }
