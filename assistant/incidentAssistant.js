@@ -170,7 +170,7 @@ function assignIncidentIntent(assistant) {
 
                                console.log(assignedUser.name);
                                 var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
-                                resolve(assistant.tell("Testing allllllllll"));
+                                resolve(speech);
                             }, function (err) {
 
                                 resolve(assistant.tell("Sorry!! some error occured in assigning  a incident. Please try again!!"));
