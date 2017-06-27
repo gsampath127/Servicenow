@@ -149,12 +149,15 @@ function assignIncidentIntent(assistant) {
     var user = assistant.getArgument('user'),
         number = assistant.getArgument('number'),
         userPostData = { 'name': String(user) },
+        prevUser ='',
+        assignedUser ='',
         incidentPostData = { 'number': number };
     return new Promise(function (resolve, reject) {
         incidentData.GetAllIncidents(incidentPostData).then(function (incident) {
             var previousIncidentData = incident[0];
             console.log("before assigned");
-            console.log(previousIncidentData.assigned_to);
+           
+            incidentData.GetUser(incident[0].assigned_to.value).then(function(d){ console.log(d); prevUser=d;  });
            // console.log(previousIncidentData);
             incidentData.GetUsers(userPostData).then(function (userData) {
                     var userSysId = userData[0].sys_id;
@@ -163,8 +166,9 @@ function assignIncidentIntent(assistant) {
                     var updateData = { assigned_to:  userSysId  };
                     incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
                         console.log("after assigned");
-                        console.log(item.assigned_to);
-                        var speech = "Great!! Your ticket " + item.number + "was assigned which describes on " + item.short_description;
+                        
+                        incidentData.GetUser(item.assigned_to.value).then(function(d){ console.log(d); assignedUser=d;  });
+                        var speech = "Great!! " + previousIncidentData[0].number + " ticket was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
                         resolve(assistant.tell(speech));
                     }, function (err) {
 
@@ -175,7 +179,7 @@ function assignIncidentIntent(assistant) {
         });
 
 
-        resolve("heloo");
+       
     });
 
 }
