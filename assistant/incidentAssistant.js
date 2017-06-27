@@ -5,7 +5,8 @@ var constants = require('../constants');
 const INCIDENT_INTENT = 'input.incident';  // the action name from the API.AI intent
 const INCIDENT_ALL_INTENT = 'input.incidents';  // the action name from the API.AI intent
 const INCIDENT_CREATE_INTENT = 'input.createincident';  // the action name from the API.AI intent
-const INCIDENT_CLOSE_INTENT = 'input.closeincident';  // the action name from the API.AI intent
+const INCIDENT_CLOSE_INTENT = 'input.closeincident';  // the action name from the API.AI intent 
+const INCIDENT_GET_ASSIGN_INTENT = 'input.getassignincident';  // the action name from the API.AI intent 
 
 
 var initializeIncident = function (actionMap) {
@@ -13,6 +14,7 @@ var initializeIncident = function (actionMap) {
     actionMap.set(INCIDENT_ALL_INTENT, incidentAllIntent);
     actionMap.set(INCIDENT_CREATE_INTENT, incidentCreateIntent);
     actionMap.set(INCIDENT_CLOSE_INTENT, incidentCloseIntent);
+    actionMap.set(INCIDENT_GET_ASSIGN_INTENT, getIncidentAssignedIntent);
 };
 
 //function incidentAllIntent(assistant) {
@@ -86,6 +88,49 @@ function incidentCloseIntent(assistant) {
                 
                 incidentData.CloseIncident(data[0].sys_id,updateData).then(function (item) {
                     var speech = "Great!! Your ticket " + item.number + "was closed which describes on " + item.short_description;
+                    resolve(assistant.tell(speech));
+                }, function (err) {
+
+                    resolve(assistant.tell("Sorry!! some error occured in closing a incident. Please try again!!"));
+                });
+            });
+
+
+    });
+
+
+}
+
+function getIncidentAssignedIntent(assistant) {
+    var  user = assistant.getArgument('user'),
+          postData = { 'name': String(user)};
+    
+    return new Promise(function (resolve, reject) {
+
+        incidentData.GetUsers(postData)
+            .then(function (data) {
+                console.log("user data");
+                console.log(data);
+                var userSysId = data[0].sys_id;
+                incidentData.GetAllIncidents(null).then(function (items) {
+
+                    items = items.filter(function (e) {
+                        return e.assigned_to.value == userSysId;
+
+                    });
+                    var speech = "";
+                    if (items.length <= 0) {
+                        speech = "Sorry!! Could not find the results";
+                    } else if (items.length == 1) {
+                        speech = "The incident " + items[0].number + " describes on " + items[0].short_description + " with urgency level " + constants.getDescription(constants.Urgency, items[0].urgency);
+                    }
+                    else {
+                        speech = "Please find below data ";
+                        for (var i = 0 ; i < items.length ; i++) {
+                            speech = speech + " " + items[i].number + " describes on " + items[i].short_description + " with urgency level " + constants.getDescription(constants.Urgency, items[0].urgency);
+                        }
+                    }
+                    
                     resolve(assistant.tell(speech));
                 }, function (err) {
 

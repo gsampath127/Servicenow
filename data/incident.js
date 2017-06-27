@@ -23,16 +23,20 @@ var getAllIncidents = function (data) {
             response.on('end', function () {
                 var obj = JSON.parse(str),
                  incidents = obj.result;
-                 incidents = incidents.filter(function (item) {
-                    for (var key in data) {
-                       
-                        if (data[key] && (item[key] === undefined || item[key] != data[key]))
-                            return false;
-                    }
-                    return true;
-                    // return ((e.number == data.incidentNumber && data.incidentNumber!=null) || ( e.state == data.state && data.state!=null)|| (e.urgency == data.urgency && data.urgency!=''));
-                });
-               
+
+                if (data) {
+
+
+                    incidents = incidents.filter(function (item) {
+                        for (var key in data) {
+
+                            if (data[key] && (item[key] === undefined || item[key] != data[key]))
+                                return false;
+                        }
+                        return true;
+                        // return ((e.number == data.incidentNumber && data.incidentNumber!=null) || ( e.state == data.state && data.state!=null)|| (e.urgency == data.urgency && data.urgency!=''));
+                    });
+                }
               
                 resolve(incidents);
             });
@@ -109,9 +113,6 @@ var getIncident = function (sysId) {
 
     });
 };
-var Test = function () {
-    return "Testinggg";
-};
 var updateIncident = function (sysId, updateData) {
     console.log(sysId);
     console.log(updateData);
@@ -150,10 +151,56 @@ var updateIncident = function (sysId, updateData) {
     });
 };
 
+
+// Get User
+
+var getUsers = function (data) {
+    return new Promise(function (resolve, reject) {
+        var str = '';
+        var url = CONFIG.ServicenowURL + 'api/now/table/sys_user?sysparam_fields=name,gender,user_name,sys_id,first_name,email,last_name';
+        request.get(url, {
+            'auth': {
+                'user': CONFIG.username,
+                'pass': CONFIG.password,
+                'sendImmediately': false
+            },
+            'headers': {
+                'Content-Type': 'application/json'
+            }
+        }).on('response', function (response) {
+
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+
+            response.on('end', function () {
+                var obj = JSON.parse(str),
+                 users = obj.result;
+                users = users.filter(function (item) {
+                    for (var key in data) {
+
+                        if (data[key] && (item[key] === undefined || item[key] != data[key]))
+                            return false;
+                    }
+                    return true;
+                    // return ((e.number == data.incidentNumber && data.incidentNumber!=null) || ( e.state == data.state && data.state!=null)|| (e.urgency == data.urgency && data.urgency!=''));
+                });
+
+
+                resolve(users);
+            });
+        }).on('error', function (err) {
+            reject(err.statusText);
+        });
+
+    });
+};
+
 module.exports.GetAllIncidents = getAllIncidents;
 module.exports.CreateIncident = createIncident;
 module.exports.GetIncident = getIncident;
 module.exports.CloseIncident = updateIncident;
+module.exports.GetUsers = getUsers;
 module.exports.Test = Test;
 
    
