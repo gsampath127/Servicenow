@@ -149,29 +149,38 @@ function assignIncidentIntent(assistant) {
     var user = assistant.getArgument('user'),
         number = assistant.getArgument('number'),
         userPostData = { 'name': String(user) },
-        prevUser ='',
-        assignedUser ='',
+       
         incidentPostData = { 'number': number };
     return new Promise(function (resolve, reject) {
         incidentData.GetAllIncidents(incidentPostData).then(function (incident) {
             var previousIncidentData = incident[0];
-            console.log("before assigned");
-           
-            incidentData.GetUser(incident[0].assigned_to.value).then(function (d) { prevUser = d; });
-            console.log(prevUser.name);
-           // console.log(previousIncidentData);
+            
             incidentData.GetUsers(userPostData).then(function (userData) {
-                    var userSysId = userData[0].sys_id;
-                    console.log(userSysId);
+                    
                     // Updating the incident
                     var updateData = { assigned_to:  userSysId  };
                     incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
-                        console.log("after assigned");
                         
-                        incidentData.GetUser(item.assigned_to.value).then(function (d) { assignedUser = d; console.log(d.name); });
-                        console.log(assignedUser.name);
-                        var speech = "Great!! " + previousIncidentData[0].number + " ticket was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
-                        resolve(assistant.tell(speech));
+
+                        incidentData.GetUser(incident[0].assigned_to.value).then(function (prevUser) {
+                            
+
+                            incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
+
+                                console.log(assignedUser.name);
+                                var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
+                                resolve(assistant.tell(speech));
+                            });
+
+                        });
+
+
+
+
+
+                        
+                        
+                        
                     }, function (err) {
 
                         resolve(assistant.tell("Sorry!! some error occured in assigning  a incident. Please try again!!"));
