@@ -226,11 +226,45 @@ var getUser = function (sysId) {
 
     });
 };
+
+var getUserByName = function (name) {
+    return new Promise(function (resolve, reject) {
+        var str = '';
+        var url = CONFIG.ServicenowURL + 'api/now/table/sys_user?sysparm_query=name=' + name;
+        
+        request.get(url, {
+            'auth': {
+                'user': CONFIG.username,
+                'pass': CONFIG.password,
+                'sendImmediately': false
+            },
+            'headers': {
+                'Content-Type': 'application/json'
+            }
+        }).on('response', function (response) {
+
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+
+            response.on('end', function () {
+                var obj = JSON.parse(str),
+                 users = obj.result;
+
+                resolve(users);
+            });
+        }).on('error', function (err) {
+            reject(err.statusText);
+        });
+
+    });
+};
 module.exports.GetAllIncidents = getAllIncidents;
 module.exports.CreateIncident = createIncident;
 module.exports.GetIncident = getIncident;
 module.exports.UpdateIncident = updateIncident;
 module.exports.GetUsers = getUsers;
 module.exports.GetUser = getUser;
+module.exports.GetUserByName = getUserByName;
 
    
