@@ -156,9 +156,9 @@ function assignIncidentIntent(assistant) {
             var previousIncidentData = incident[0];
             
             incidentData.GetUsers(userPostData).then(function (userData) {
-                    
+                  
                     // Updating the incident
-                    var updateData = { assigned_to:  userSysId  };
+                    var updateData = { assigned_to: userData[0].sys_id };
                     incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
                         
 
