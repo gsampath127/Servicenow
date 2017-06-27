@@ -155,8 +155,7 @@ function assignIncidentIntent(assistant) {
             var previousIncidentData = incidentData[0];
             console.log("before assigned");
             console.log(previousIncidentData);
-            incidentData.GetUsers(userPostData)
-                .then(function (userData) {
+            incidentData.GetUsers(userPostData).then(function (userData) {
                     var userSysId = userData[0].sys_id;
 
                     // Updating the incident
