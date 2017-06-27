@@ -153,17 +153,17 @@ function assignIncidentIntent(assistant) {
         incidentPostData = { 'number': number };
     return new Promise(function (resolve, reject) {
         incidentData.GetIncident(number).then(function (incident) {
-            var previousIncidentData = incident;
+         
            
             incidentData.GetUserByName(String(user)).then(function (userData) {
                
 
                     // Updating the incident
                     var updateData = { assigned_to: userData.sys_id };
-                    incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
+                    incidentData.UpdateIncident(incident.sys_id, updateData).then(function (item) {
                         
 
-                        incidentData.GetUser(incident[0].assigned_to.value).then(function (prevUser) {
+                        incidentData.GetUser(incident.assigned_to.value).then(function (prevUser) {
                             
 
                            incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
