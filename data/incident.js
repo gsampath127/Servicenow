@@ -218,7 +218,7 @@ var getUser = function (sysId) {
                  users = obj.result;
                 console.log("usersssss");
                 console.log(obj);
-                resolve(users);
+                resolve(users[0]);
             });
         }).on('error', function (err) {
             reject(err.statusText);
