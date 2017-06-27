@@ -160,7 +160,7 @@ function assignIncidentIntent(assistant) {
                     var userSysId = userData[0].sys_id;
                     console.log(userSysId);
                     // Updating the incident
-                    var updateData = { assigned_to: { value: userSysId } };
+                    var updateData = { assigned_to:  userSysId  };
                     incidentData.UpdateIncident(previousIncidentData.sys_id, updateData).then(function (item) {
                         console.log("after assigned");
                         console.log(item.assigned_to);
