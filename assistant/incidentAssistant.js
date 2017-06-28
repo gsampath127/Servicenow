@@ -38,12 +38,12 @@ function incidentAllIntent(assistant) {
                 if (data.length <= 0) {
                     speech = "Sorry!! Could not find the results";
                 } else if (data.length == 1) {
-                    speech = "The incident " + data[0].number + " describes on " + data[0].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[0].urgency) + "and status is " + constants.getDescription(constants.State, data[0].state);
+                    speech = "The incident " + data[0].number + " describes on " + data[0].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[0].urgency) + " and status is " + constants.getDescription(constants.State, data[0].state);
                 }
                 else {
                     speech = "Please find below data ";
                     for (var i = 0 ; i < data.length ; i++) {
-                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[i].urgency) +"and status is " + constants.getDescription(constants.State, data[i].state);
+                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[i].urgency) +" and status is " + constants.getDescription(constants.State, data[i].state);
                     }
                 }
 
