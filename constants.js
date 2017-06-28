@@ -6,13 +6,14 @@
 };
 
 var state = {
-    New: 1,
-    Active: 2,
-    AwaitingProblem: 3,
-    AwaitingUserInfo: 4,
-    AwaitingEvidence: 5,
-    Resolved: 6,
-    Closed:7
+    New: {description : "new" , value : 1},
+    Active: {description : "active" , value : 2},
+    AwaitingProblem: {description : "AwaitingProblem" , value : 3},
+    AwaitingUserInfo: {description : "AwaitingUserInfo" , value : 4},
+    AwaitingEvidence: {description : "AwaitingEvidence" , value : 5},
+    Resolved: {description : "Resolved" , value : 6},
+    Closed: { description: "Closed", value: 7 }
+
 
 };
 var impact = {
@@ -48,6 +49,7 @@ var contacttype = {
 
 module.exports.Category = category;
 module.exports.Urgency = urgency;
+module.exports.State = state;
 
 module.exports.getValue = function (object, value) {
     

@@ -38,12 +38,12 @@ function incidentAllIntent(assistant) {
                 if (data.length <= 0) {
                     speech = "Sorry!! Could not find the results";
                 } else if (data.length == 1) {
-                    speech = "The incident " + data[0].number + " describes on " + data[0].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[0].urgency);
+                    speech = "The incident " + data[0].number + " describes on " + data[0].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[0].urgency) + "and status is " + constants.getDescription(constants.State, data[0].state);
                 }
                 else {
                     speech = "Please find below data ";
                     for (var i = 0 ; i < data.length ; i++) {
-                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[0].urgency);
+                        speech = speech + " " + data[i].number + " describes on " + data[i].short_description + " with urgency level " + constants.getDescription(constants.Urgency, data[i].urgency) +"and status is " + constants.getDescription(constants.State, data[i].state);
                     }
                 }
 
@@ -164,24 +164,24 @@ function assignIncidentIntent(assistant) {
                         
 
                         incidentData.GetUser(incident.assigned_to.value).then(function (prevUser) {
-                            
 
-                          // incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
 
-                             //  console.log(assignedUser.name);
+                            // incidentData.GetUser(item.assigned_to.value).then(function (assignedUser) {
+
+                            //  console.log(assignedUser.name);
                             var speech = "Great!! The ticket " + number + "  which describes on " + item.short_description + " assigned from " + prevUser.name + " to " + user;
-                        // var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
-                               resolve(assistant.tell(speech));
-                            }, function (err) {
-
-                                resolve(assistant.tell("Sorry!! some error occured in assigning  a incident. Please try again!!"));
-
-                            });
+                            // var speech = "Great!! The ticket " + number + " was assigned which describes on " + item.short_description + "assigned from " + prevUser.name + " to" + assignedUser.name;
+                            resolve(assistant.tell(speech));
+                        });
 
                        // });
   
                     });
                 });
+
+        }, function (err) {
+
+            resolve(assistant.tell("Sorry!! some error occured in assigning  a incident. Please try again!!"));
 
         });
 
