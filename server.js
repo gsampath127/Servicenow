@@ -102,7 +102,19 @@ function InitializeAssistant(req, res) {
 
 function welcomeIntent(assistant) {
 
-    assistant.buildBasicCard("Hey Welcome................");
+    //assistant.ask(assistant.buildBasicCard("Hey Welcome................"));
+    assistant.ask(app.buildRichResponse()
+   // Create a basic card and add it to the rich response
+
+   .addSimpleResponse('Math and prime numbers it is!')
+   .addBasicCard(app.buildBasicCard('42 is an even composite number. It'
+     )
+     .setTitle('Math & prime numbers')
+     .addButton('Read more')
+     .setImage('https://example.google.com/42.png', 'Image alternate text')
+    )
+  );
+    
    // assistant.ask('Hey!  Welcome to Servicenow. Here you can manage all your operations for Incidents , Problems etc');
 }
 
