@@ -101,7 +101,9 @@ function InitializeAssistant(req, res) {
 
 
 function welcomeIntent(assistant) {
-    assistant.ask('Hey!  Welcome to Servicenow. Here you can manage all your operations for Incidents , Problems etc');
+
+    assistant.buildBasicCard("Hey Welcome................");
+   // assistant.ask('Hey!  Welcome to Servicenow. Here you can manage all your operations for Incidents , Problems etc');
 }
 
 

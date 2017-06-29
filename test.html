@@ -8,36 +8,7 @@
 </head>
 <body>
     ......
+    <iframe width="350" height="430" src="https://console.api.ai/api-client/demo/embedded/8a98e658-8a0b-4aa6-aed5-d53089654803"></iframe>
 </body>
 </html>
 
-<script>
-    $.ajax({
-        xhrFields: {
-            withCredentials: true
-        },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('admin:SAMPATH18'));
-        },
-        url: "https://dev19713.service-now.com/api/now/table/incident",
-        method: "GET",
-        crossDomain: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-            'Access-Control-Allow-Credentials': true
-        },
-        success:function(s)
-        {
-            alert("success");
-        },
-        error:function(e)
-        {
-            alert("error");
-            console.log(e.statusText);
-
-        }
-    });
-
-
-</script>
