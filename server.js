@@ -100,10 +100,10 @@ function InitializeAssistant(req, res) {
 
 
 
-function welcomeIntent(assistant) {
+function welcomeIntent(app) {
 
     //assistant.ask(assistant.buildBasicCard("Hey Welcome................"));
-    assistant.ask(app.buildRichResponse()
+    app.ask(app.buildRichResponse()
    // Create a basic card and add it to the rich response
 
    .addSimpleResponse('Math and prime numbers it is!')
